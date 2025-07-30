@@ -1,10 +1,13 @@
+enum Complexity { simple, medium, complex }
 
 class Recipe {
   final String id;
   final String title;
   final String imageUrl;
   final List<String> ingredients;
-  final String instructions;
+  final List<String> instructions; 
+  final int duration;
+  final Complexity complexity;
   bool isFavorite;
 
   Recipe({
@@ -14,5 +17,7 @@ class Recipe {
     required this.ingredients,
     required this.instructions,
     this.isFavorite = false,
+    required this.duration,
+    required this.complexity,
   });
 }
