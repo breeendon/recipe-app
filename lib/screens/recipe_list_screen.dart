@@ -1,7 +1,10 @@
+// lib/screens/recipe_list_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:journal/dummy_data.dart';
 import 'package:journal/recipe.dart';
 import 'package:journal/screens/recipe_detail_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RecipeListScreen extends StatefulWidget {
   const RecipeListScreen({super.key});
@@ -11,6 +14,35 @@ class RecipeListScreen extends StatefulWidget {
 }
 
 class _RecipeListScreenState extends State<RecipeListScreen> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoriteIds = prefs.getStringList('favoriteRecipeIds') ?? [];
+
+    setState(() {
+      for (var recipe in dummyRecipes) {
+        recipe.isFavorite = favoriteIds.contains(recipe.id);
+      }
+      _isLoading = false;
+    });
+  }
+
+  Future<void> _saveFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoriteIds = dummyRecipes
+        .where((recipe) => recipe.isFavorite)
+        .map((recipe) => recipe.id)
+        .toList();
+    await prefs.setStringList('favoriteRecipeIds', favoriteIds);
+  }
+
   void _selectRecipe(BuildContext context, Recipe recipe) async {
     final updatedRecipe = await Navigator.of(context).push<Recipe>(
       MaterialPageRoute(
@@ -27,11 +59,16 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
           dummyRecipes[index].isFavorite = updatedRecipe.isFavorite;
         }
       });
+      await _saveFavorites();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,

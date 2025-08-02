@@ -21,10 +21,21 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   void _toggleFavorite() {
+    String message;
+    if (_isFavorite) {
+      message = 'Recipe removed from favorites!';
+    } else {
+      message = 'Recipe added to favorites!';
+    }
+
     setState(() {
       _isFavorite = !_isFavorite;
       widget.recipe.isFavorite = _isFavorite;
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
+    );
   }
 
   Widget _buildSectionTitle(BuildContext context, String text) {
