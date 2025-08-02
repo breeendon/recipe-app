@@ -1,21 +1,33 @@
-// lib/screens/recipe_list_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:journal/dummy_data.dart';
 import 'package:journal/recipe.dart';
-import 'package:journal/screens/recipe_detail_screen.dart'; 
+import 'package:journal/screens/recipe_detail_screen.dart';
 
-class RecipeListScreen extends StatelessWidget {
+class RecipeListScreen extends StatefulWidget {
   const RecipeListScreen({super.key});
 
-  void _selectRecipe(BuildContext context, Recipe recipe) {
-    Navigator.of(context).push(
+  @override
+  State<RecipeListScreen> createState() => _RecipeListScreenState();
+}
+
+class _RecipeListScreenState extends State<RecipeListScreen> {
+  void _selectRecipe(BuildContext context, Recipe recipe) async {
+    final updatedRecipe = await Navigator.of(context).push<Recipe>(
       MaterialPageRoute(
         builder: (ctx) {
           return RecipeDetailScreen(recipe: recipe);
         },
       ),
     );
+
+    if (updatedRecipe != null) {
+      setState(() {
+        final index = dummyRecipes.indexWhere((r) => r.id == updatedRecipe.id);
+        if (index != -1) {
+          dummyRecipes[index].isFavorite = updatedRecipe.isFavorite;
+        }
+      });
+    }
   }
 
   @override
@@ -65,12 +77,19 @@ class RecipeListScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      recipe.title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          recipe.title,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (recipe.isFavorite)
+                          const Icon(Icons.star, color: Colors.amber, size: 20),
+                      ],
                     ),
                   ],
                 ),

@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:journal/recipe.dart';
+import 'package:journal/detail_section_widgets.dart';
 
-class RecipeDetailScreen extends StatelessWidget {
+class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
 
   const RecipeDetailScreen({super.key, required this.recipe});
+
+  @override
+  State<RecipeDetailScreen> createState() => _RecipeDetailScreenState();
+}
+
+class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
+  bool _isFavorite = false;
+
+  @override
+  void initState() {
+    _isFavorite = widget.recipe.isFavorite;
+    super.initState();
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorite = !_isFavorite;
+      widget.recipe.isFavorite = _isFavorite;
+    });
+  }
 
   Widget _buildSectionTitle(BuildContext context, String text) {
     return Padding(
@@ -13,60 +34,56 @@ class RecipeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContainer(Widget child) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5.0),
-      padding: const EdgeInsets.all(10.0),
-      child: child,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(recipe.title)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 300,
-              width: double.infinity,
-              child: Image.network(recipe.imageUrl, fit: BoxFit.cover),
+      appBar: AppBar(
+        title: Text(widget.recipe.title),
+        actions: [
+          IconButton(
+            icon: Icon(
+              _isFavorite ? Icons.star : Icons.star_border,
+              color: _isFavorite ? Colors.amber : null,
             ),
-            _buildSectionTitle(context, 'Ingredients'),
-            _buildContainer(
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: recipe.ingredients.map((ingredient) {
-                  return Text(
-                    '- $ingredient',
-                    style: const TextStyle(fontSize: 16),
-                  );
-                }).toList(),
+            onPressed: _toggleFavorite,
+          ),
+        ],
+      ),
+      body: WillPopScope(
+        onWillPop: () async {
+          Navigator.of(context).pop(widget.recipe);
+          return true;
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 300,
+                width: double.infinity,
+                child: Image.network(
+                  widget.recipe.imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 300,
+                      width: double.infinity,
+                      color: Colors.grey[300],
+                      child: const Icon(
+                        Icons.broken_image,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            _buildSectionTitle(context, 'Instructions'),
-            _buildContainer(
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: recipe.instructions.map((instruction) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Text(
-                      instruction,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              _buildSectionTitle(context, 'Ingredients'),
+              IngredientsList(ingredients: widget.recipe.ingredients),
+              _buildSectionTitle(context, 'Instructions'),
+              InstructionsList(instructions: widget.recipe.instructions),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
