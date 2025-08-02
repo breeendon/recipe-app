@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:journal/screens/recipe_list_screen.dart'; 
-
-
 void main() {
   runApp(const MyApp());
 }

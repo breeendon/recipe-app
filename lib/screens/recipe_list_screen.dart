@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:journal/dummy_data.dart';
 import 'package:journal/recipe.dart';
-import 'package:journal/screens/recipe_detail_screen.dart'; // Import the new detail screen
+import 'package:journal/screens/recipe_detail_screen.dart'; 
 
 class RecipeListScreen extends StatelessWidget {
   const RecipeListScreen({super.key});
