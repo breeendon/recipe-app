@@ -1,7 +1,13 @@
+// lib/screens/tabs_screen.dart
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:journal/dummy_data.dart';
+import 'package:journal/recipe.dart';
 import 'package:journal/screens/recipe_list_screen.dart';
 import 'package:journal/screens/favorites_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -12,6 +18,52 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
+  List<Recipe> _recipes = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRecipes();
+  }
+
+  void _loadRecipes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final recipesJson = prefs.getString('recipes');
+
+    if (recipesJson != null) {
+      final List<dynamic> jsonList = jsonDecode(recipesJson);
+      _recipes = jsonList.map((json) => Recipe.fromJson(json)).toList();
+    } else {
+      _recipes = List.from(initialDummyRecipes);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  void _saveRecipes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final recipesJson = jsonEncode(_recipes.map((e) => e.toJson()).toList());
+    await prefs.setString('recipes', recipesJson);
+  }
+
+  void _addRecipe(Recipe newRecipe) {
+    setState(() {
+      _recipes.add(newRecipe);
+    });
+    _saveRecipes();
+  }
+
+  void _updateRecipe(Recipe updatedRecipe) {
+    setState(() {
+      final index = _recipes.indexWhere((r) => r.id == updatedRecipe.id);
+      if (index != -1) {
+        _recipes[index].isFavorite = updatedRecipe.isFavorite;
+      }
+    });
+    _saveRecipes();
+  }
 
   void _selectPage(int index) {
     setState(() {
@@ -21,9 +73,17 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [
-      const RecipeListScreen(),
-      FavoritesScreen(recipes: dummyRecipes),
+    if (_isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    final List<Widget> pages = [
+      RecipeListScreen(
+        recipes: _recipes,
+        addRecipe: _addRecipe,
+        updateRecipe: _updateRecipe,
+      ),
+      FavoritesScreen(recipes: _recipes, updateRecipe: _updateRecipe),
     ];
 
     return Scaffold(

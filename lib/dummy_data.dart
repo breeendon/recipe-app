@@ -1,11 +1,11 @@
 import 'package:journal/recipe.dart';
 
-List<Recipe> dummyRecipes = [
+final List<Recipe> initialDummyRecipes = [
   Recipe(
-    id: 'r1',
+    id: '99b2c342-a720-4318-8f85-45d2e057864f',
     title: 'Spaghetti with Tomato Sauce',
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Spaghetti_al_rag%C3%B9_-_Gastronomic_event_at_Veggiano_2011.jpg/800px-Spaghetti_al_rag%C3%B9_-_Gastronomic_event_at_Veggiano_2011.jpg',
+        'https://i.imgur.com/77cFvE2.jpeg',
     ingredients: [
       '400g spaghetti',
       '1 can (400g) crushed tomatoes',
@@ -27,10 +27,10 @@ List<Recipe> dummyRecipes = [
     complexity: Complexity.simple,
   ),
   Recipe(
-    id: 'r2',
+    id: '26949b28-1b29-45e0-b6f4-1f744e8c17b5',
     title: 'Classic Margherita Pizza',
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/a/a2/Pizza_Margherita_-_Naples_2017.jpg',
+        'https://i.imgur.com/AWDVDwx.jpeg',
     ingredients: [
       '1 pizza dough',
       '1/2 cup tomato sauce',
@@ -52,10 +52,10 @@ List<Recipe> dummyRecipes = [
     complexity: Complexity.simple,
   ),
   Recipe(
-    id: 'r3',
+    id: 'f941160a-0118-4065-985c-15a018f77341',
     title: 'Chicken Stir-fry',
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/e/e0/Stir_Fry_Chicken.jpg',
+        'https://i.imgur.com/17axEak.png',
     ingredients: [
       '500g chicken breast, sliced',
       '1 tbsp soy sauce',
@@ -81,10 +81,10 @@ List<Recipe> dummyRecipes = [
     complexity: Complexity.medium,
   ),
   Recipe(
-    id: 'r4',
+    id: 'f7267107-16d7-463d-88f5-93049b4007f3',
     title: 'Vegetable Lasagna',
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/b/b3/Lasagna_vegetariana_%285038595304%29.jpg',
+        'https://i.imgur.com/6JuleFY.png',
     ingredients: [
       '12 lasagna noodles',
       '1 tbsp olive oil',
@@ -114,5 +114,162 @@ List<Recipe> dummyRecipes = [
     ],
     duration: 60,
     complexity: Complexity.complex,
+  ),
+  Recipe(
+    id: '8681e8fc-f458-450f-90e9-b684a0d8435d',
+    title: 'Beef Tacos',
+    imageUrl:
+        'https://i.imgur.com/YmrfU6w.jpeg',
+    ingredients: [
+      '500g ground beef',
+      '1 packet taco seasoning',
+      '1/2 cup water',
+      '8 hard or soft taco shells',
+      'Shredded lettuce',
+      'Diced tomatoes',
+      'Shredded cheese',
+      'Sour cream',
+    ],
+    instructions: [
+      'Cook ground beef in a large skillet over medium-high heat until browned. Drain fat.',
+      'Stir in taco seasoning and water. Bring to a simmer and cook for 5 minutes, stirring occasionally.',
+      'Heat taco shells according to package directions.',
+      'Fill taco shells with ground beef, then top with lettuce, tomatoes, cheese, and sour cream.',
+      'Serve immediately.',
+    ],
+    duration: 20,
+    complexity: Complexity.simple,
+  ),
+  Recipe(
+    id: '208f6580-0a25-455b-8197-e83c74ae3863',
+    title: 'Salmon with Roasted Asparagus',
+    imageUrl:
+        'https://i.imgur.com/ByLbP52.jpeg',
+    ingredients: [
+      '2 salmon fillets',
+      '1 bunch asparagus, trimmed',
+      '2 tbsp olive oil',
+      '1 lemon, sliced',
+      'Salt and black pepper to taste',
+      '1 tbsp fresh dill, chopped',
+    ],
+    instructions: [
+      'Preheat oven to 200°C (400°F).',
+      'Toss asparagus with 1 tbsp olive oil, salt, and pepper on a baking sheet.',
+      'Place salmon fillets on the same baking sheet. Drizzle with remaining 1 tbsp olive oil and season with salt and pepper.',
+      'Top each fillet with a lemon slice.',
+      'Bake for 12-15 minutes, or until salmon is cooked through and asparagus is tender.',
+      'Garnish with fresh dill before serving.',
+    ],
+    duration: 25,
+    complexity: Complexity.medium,
+  ),
+  Recipe(
+    id: 'e285a73e-327c-4740-974d-4521711c215c',
+    title: 'Mushroom Risotto',
+    imageUrl:
+        'https://i.imgur.com/oGIF0rc.jpeg',
+    ingredients: [
+      '1.5 liters vegetable broth',
+      '2 tbsp olive oil',
+      '1 onion, finely chopped',
+      '2 cloves garlic, minced',
+      '300g Arborio rice',
+      '200g mixed mushrooms, sliced',
+      '100ml dry white wine',
+      '50g Parmesan cheese, grated',
+      '2 tbsp butter',
+      'Salt and pepper to taste',
+      'Fresh parsley, chopped',
+    ],
+    instructions: [
+      'Heat vegetable broth in a saucepan and keep warm over low heat.',
+      'In a separate large pan, heat olive oil. Add onion and cook until softened.',
+      'Add garlic and mushrooms and cook until mushrooms are tender and have released their liquid.',
+      'Stir in the Arborio rice and toast for 2 minutes.',
+      'Pour in the white wine and cook until it has been absorbed.',
+      'Add one ladle of warm broth to the rice, stirring continuously until the liquid is absorbed. Continue adding broth, one ladle at a time, for about 20-25 minutes until the rice is creamy and al dente.',
+      'Stir in Parmesan cheese, butter, salt, and pepper. Garnish with parsley and serve immediately.',
+    ],
+    duration: 45,
+    complexity: Complexity.complex,
+  ),
+  Recipe(
+    id: '0139e6a9-858a-4061-ab3f-a690d783a3d5',
+    title: 'Chocolate Lava Cake',
+    imageUrl:
+        'https://i.imgur.com/pavJyfs.png',
+    ingredients: [
+      '100g dark chocolate',
+      '100g butter',
+      '2 eggs',
+      '2 egg yolks',
+      '50g sugar',
+      '2 tbsp flour',
+      'Pinch of salt',
+      'Cocoa powder for dusting',
+    ],
+    instructions: [
+      'Preheat oven to 200°C (400°F). Grease and flour two ramekins, or dust with cocoa powder.',
+      'Melt chocolate and butter together in a heatproof bowl over simmering water. Stir until smooth, then set aside to cool slightly.',
+      'In a separate bowl, whisk eggs, egg yolks, and sugar until pale and thick.',
+      'Gently fold the melted chocolate mixture into the egg mixture.',
+      'Sift in the flour and salt and fold until just combined.',
+      'Pour the batter into the prepared ramekins.',
+      'Bake for 10-12 minutes. The edges should be firm, but the center should still be soft.',
+      'Carefully invert the cakes onto plates and serve immediately with ice cream or berries.',
+    ],
+    duration: 20,
+    complexity: Complexity.medium,
+  ),
+  Recipe(
+    id: 'd9b757e8-e4b9-4a7b-a318-7a523a6f4460',
+    title: 'Creamy Tomato Soup',
+    imageUrl:
+        'https://i.imgur.com/7ltzASQ.jpeg',
+    ingredients: [
+      '2 tbsp olive oil',
+      '1 onion, chopped',
+      '2 cloves garlic, minced',
+      '1 can (800g) crushed tomatoes',
+      '4 cups vegetable broth',
+      '1/2 cup heavy cream',
+      'Salt and pepper to taste',
+      'Fresh basil for garnish',
+    ],
+    instructions: [
+      'In a large pot, heat olive oil over medium heat. Add onion and cook until soft.',
+      'Add garlic and cook for 1 minute more.',
+      'Stir in crushed tomatoes and vegetable broth. Bring to a boil, then reduce heat and simmer for 20 minutes.',
+      'Use an immersion blender to blend the soup until smooth. Alternatively, transfer to a blender in batches.',
+      'Stir in the heavy cream and season with salt and pepper.',
+      'Serve hot, garnished with fresh basil.',
+    ],
+    duration: 35,
+    complexity: Complexity.simple,
+  ),
+  Recipe(
+    id: 'c4e402ac-4158-40b9-8e41-0b5c165d491c',
+    title: 'Roasted Chicken',
+    imageUrl:
+        'https://i.imgur.com/0eMJ9sS.jpeg',
+    ingredients: [
+      '1 whole chicken (1.5-2kg)',
+      '2 tbsp olive oil',
+      'Salt and black pepper',
+      '1 tbsp dried herbs (e.g., thyme, rosemary)',
+      '1 lemon, halved',
+      '1 head garlic, halved',
+      '1 onion, quartered',
+    ],
+    instructions: [
+      'Preheat oven to 200°C (400°F).',
+      'Pat the chicken dry with paper towels. Rub with olive oil and season generously with salt, pepper, and herbs.',
+      'Stuff the cavity with the lemon, garlic, and onion.',
+      'Place the chicken in a roasting pan and roast for 1 hour to 1 hour 20 minutes, or until the internal temperature reaches 75°C (165°F).',
+      'Let the chicken rest for 10 minutes before carving and serving.',
+    ],
+    duration: 75,
+    complexity: Complexity.medium,
   ),
 ];
