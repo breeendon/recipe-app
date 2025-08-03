@@ -1,16 +1,20 @@
-# journal
+# Chef's Kiss
 
-A new Flutter project.
+Recipe App that allows a user to pick from a few starter recipes, add favorite recipes to a searchable list, and add their own custom recipes.
 
-## Getting Started
+![Screenshot](1000005302.png)
 
-This project is a starting point for a Flutter application.
+# Getting Started
 
-A few resources to get you started if this is your first Flutter project:
+To access the site use https://recipevercel.vercel.app
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To run locally:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 1. Clone the repository
+git clone https://github.com/breeendon/recipe-app.git
+cd recipe-app
+
+# 2. Run the development server
+npm run dev
+
+# 3. Use the app!
