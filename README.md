@@ -6,13 +6,13 @@ Recipe App that allows a user to pick from a few starter recipes, add favorite r
 
 # Getting Started
 
-To access the site use https://calcvercel-xwq6.vercel.app
+To access the site use https://recipevercel.vercel.app
 
 To run locally:
 
 # 1. Clone the repository
-git clone https://github.com/breeendon/calc.git
-cd calc
+git clone https://github.com/breeendon/recipe-app.git
+cd recipe-app
 
 # 2. Run the development server
 npm run dev
